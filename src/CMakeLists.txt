@@ -14,10 +14,16 @@ PRIVATE
   Component.cpp
   System.cpp
   Scene.cpp
+  Game.cpp
+  StateManager.cpp
+  Simulation.cpp
 PUBLIC
   Component.hpp
   System.hpp
   Scene.hpp
   Registry.hpp
-
+  Game.h
+  StateManager.h
+  State.h
+  Simulation.h
   )

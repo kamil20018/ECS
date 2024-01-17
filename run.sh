@@ -2,7 +2,7 @@
 
 thread_count=$(nproc --all)
 
-while getopts 'brashc' OPTION; do
+while getopts 'brashcl' OPTION; do
     case "$OPTION" in
         h)
             echo "run - can set up the cmake project, build it and run it."
@@ -14,6 +14,7 @@ while getopts 'brashc' OPTION; do
             echo "-r   runs the project"
             echo "-a   builds and runs the project"
             echo "-c   removes all of the build files"
+            echo "-l   get line count"
             ;;
         s)
             mkdir build
@@ -37,5 +38,7 @@ while getopts 'brashc' OPTION; do
         c)
             rm -rf build
             ;;
+        l)
+            cloc --exclude-dir=imgui src
     esac
 done

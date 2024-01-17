@@ -2,10 +2,12 @@
 
 #include <stdio.h>
 #include <SFML/Graphics.hpp>
-
+#include <sstream>
+#include <iostream>
 
 struct Component {
     Component();
+    virtual std::string getDescription();
     static int componentCount;
 };
 
@@ -15,6 +17,16 @@ struct PositionComponent : public Component {
     int x;
     int y;
     void debugPrint();
+    std::string getDescription() override;
+};
+
+struct SizeComponent : public Component {
+    SizeComponent(int width, int height);
+    static int id;
+    int width;
+    int height;
+    void debugPrint();
+    std::string getDescription() override;
 };
 
 struct HpComponent : public Component {
@@ -22,6 +34,7 @@ struct HpComponent : public Component {
     static int id;
     int Hp;
     void debugPrint();
+    std::string getDescription() override;
 };
 
 struct PoisonedComponent : public Component {
@@ -30,7 +43,8 @@ struct PoisonedComponent : public Component {
     int damage;
     int duration;
     void debugPrint();
-};
+    std::string getDescription() override;
+}; 
 
 struct BodyColorComponent : public Component {
     BodyColorComponent(sf::Color color);

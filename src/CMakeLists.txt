@@ -26,4 +26,5 @@ PUBLIC
   StateManager.h
   State.h
   Simulation.h
+  Constants.hpp
   )

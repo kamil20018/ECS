@@ -46,6 +46,10 @@ class Scene {
             return std::reinterpret_pointer_cast<T>(registry.components.at(T::id)->at(id));
         }
 
+        std::string getDescription(EntityID entityID, int componentID){
+            return registry.components.at(componentID)->at(entityID)->getDescription();
+        }
+
         template <typename T>
         bool entityHasComponent(EntityID entityID){
             return (*entities.at(entityID))[T::id];

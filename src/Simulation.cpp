@@ -1,27 +1,26 @@
 #include "Simulation.h"
 
-Simulation::Simulation(std::shared_ptr<Context> context): context(context){
+Simulation::Simulation(std::shared_ptr<Context> context): context(context), scene(std::make_shared<Scene>()), system(scene){
     if(!ImGui::SFML::Init(*_window)){
         std::cout << "imgui sfml failed to init" << std::endl;
     }
 
-    auto scene = std::make_shared<Scene>();
-    System system(scene);
-
     for(int i = 0; i < 5; i++){
         EntityID dog = scene->createEntity();
 
-        auto poison = std::make_shared<PoisonedComponent>(1, i + 1);
+        auto position = std::make_shared<PositionComponent>(i, i);
+        auto size = std::make_shared<SizeComponent>(TILE_SIZE, TILE_SIZE);
         auto hp = std::make_shared<HpComponent>(100);
         auto color = std::make_shared<BodyColorComponent>(sf::Color::Red);
-        auto position = std::make_shared<PositionComponent>(i, i);
+        auto poison = std::make_shared<PoisonedComponent>(1, i + 1);
 
         (scene->addComponent(dog, poison))
+            .addComponent(dog, size)
             .addComponent(dog, hp)
             .addComponent(dog, color)
             .addComponent(dog, position);
 
-        for(int i = 0; i < 6; i++){
+        for(int i = 0; i < 3; i++){
             system.debugPrint();    
             system.applyPoison();
         }
@@ -55,13 +54,12 @@ void Simulation::processInput(){
 
 void Simulation::update(){
     ImGui::SFML::Update(*_window, deltaClock.restart());
-    ImGui::Begin("title");
-    ImGui::Text("nie pierdol");
-    ImGui::End();
 }
 
 void Simulation::draw(){
     _window->clear();
+    system.drawEntities(_window);
+    system.drawComponents(sf::Mouse::getPosition(*_window));
     ImGui::SFML::Render(*_window);
     _window->display();
 }

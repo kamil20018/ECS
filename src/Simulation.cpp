@@ -1,5 +1,7 @@
 #include "Simulation.h"
 
+//using namespace component;
+
 Simulation::Simulation(std::shared_ptr<Context> context): context(context), scene(std::make_shared<Scene>()), system(scene){
     if(!ImGui::SFML::Init(*_window)){
         std::cout << "imgui sfml failed to init" << std::endl;
@@ -8,21 +10,18 @@ Simulation::Simulation(std::shared_ptr<Context> context): context(context), scen
     for(int i = 0; i < 5; i++){
         EntityID dog = scene->createEntity();
 
-        auto position = std::make_shared<PositionComponent>(i, i);
-        auto size = std::make_shared<SizeComponent>(TILE_SIZE, TILE_SIZE);
-        auto hp = std::make_shared<HpComponent>(100);
-        auto color = std::make_shared<BodyColorComponent>(sf::Color::Red);
-        auto poison = std::make_shared<PoisonedComponent>(1, i + 1);
+        auto position = std::make_shared<component::Position>(i, i);
+        auto size = std::make_shared<component::Size>(TILE_SIZE, TILE_SIZE);
+        auto hp = std::make_shared<component::Hp>(100);
+        auto color = std::make_shared<component::BodyColor>(sf::Color::Red);
 
-        (scene->addComponent(dog, poison))
-            .addComponent(dog, size)
+        (scene->addComponent(dog, size))
             .addComponent(dog, hp)
             .addComponent(dog, color)
             .addComponent(dog, position);
 
         for(int i = 0; i < 3; i++){
             system.debugPrint();    
-            system.applyPoison();
         }
 
     }

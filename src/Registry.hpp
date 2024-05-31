@@ -10,6 +10,8 @@
 
 #include <bitset>
 
+using namespace component;
+
 constexpr size_t MAX_COMPONENTS = 32;
 typedef size_t EntityID;
 typedef std::bitset<MAX_COMPONENTS> ComponentMask;

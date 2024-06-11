@@ -1,13 +1,8 @@
 add_executable(game Source.cpp)
-  
-add_subdirectory(imgui)
 
 target_link_libraries(game
   PRIVATE
-    imgui
-    sfml-graphics
-    sfml-window
-    sfml-system
+    ImGui-SFML::ImGui-SFML
   )
 target_sources(game
 PRIVATE

@@ -5,7 +5,6 @@
 #include <vector>
 #include <memory>
 
-//#include "Entity.hpp"
 #include "Component.hpp"
 
 #include <bitset>

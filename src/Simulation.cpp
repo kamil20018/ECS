@@ -3,9 +3,7 @@
 //using namespace component;
 
 Simulation::Simulation(std::shared_ptr<Context> context): context(context), scene(std::make_shared<Scene>()), system(scene){
-    if(!ImGui::SFML::Init(*_window)){
-        std::cout << "imgui sfml failed to init" << std::endl;
-    }
+    ImGui::SFML::Init(*_window);
 
     for(int i = 0; i < 5; i++){
         EntityID dog = scene->createEntity();
@@ -20,9 +18,9 @@ Simulation::Simulation(std::shared_ptr<Context> context): context(context), scen
             .addComponent(dog, color)
             .addComponent(dog, position);
 
-        for(int i = 0; i < 3; i++){
-            system.debugPrint();    
-        }
+        // for(int i = 0; i < 3; i++){
+        //     system.debugPrint();    
+        // }
 
     }
 }
@@ -37,7 +35,7 @@ void Simulation::processInput(){
     while (_window->pollEvent(event))
     {
         //ImGui::SFML::ProcessEvent(window, event);
-        ImGui::SFML::ProcessEvent(*_window, event);
+        ImGui::SFML::ProcessEvent(event);
         if (event.type == sf::Event::Closed){
             _window->close();
         }

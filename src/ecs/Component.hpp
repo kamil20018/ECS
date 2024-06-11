@@ -12,6 +12,7 @@ struct Component {
   virtual std::string getDescription();
   static int componentCount;
 };
+
 struct Position : public Component {
   Position(int x, int y);
   static int id;

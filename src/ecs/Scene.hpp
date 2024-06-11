@@ -34,16 +34,14 @@ class Scene {
 
   template <typename T>
   std::unordered_map<EntityID, std::shared_ptr<T> >& getComponents() {
-    return *std::reinterpret_pointer_cast<
-        std::unordered_map<EntityID, std::shared_ptr<T> > >(
+    return *std::reinterpret_pointer_cast<std::unordered_map<EntityID, std::shared_ptr<T> > >(
         registry.components.at(T::id));
   }
 
   template <typename T>
   std::shared_ptr<T> getComponent(EntityID id) {
     // I've just commited a coding war crime, fight me
-    return std::reinterpret_pointer_cast<T>(
-        registry.components.at(T::id)->at(id));
+    return std::reinterpret_pointer_cast<T>(registry.components.at(T::id)->at(id));
   }
 
   std::string getDescription(EntityID entityID, int componentID) {

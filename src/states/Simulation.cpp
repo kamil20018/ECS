@@ -14,10 +14,7 @@ Simulation::Simulation(std::shared_ptr<Context> context)
     auto hp = std::make_shared<component::Hp>(100);
     auto color = std::make_shared<component::BodyColor>(sf::Color::Red);
 
-    (scene->addComponent(dog, size))
-        .addComponent(dog, hp)
-        .addComponent(dog, color)
-        .addComponent(dog, position);
+    (scene->addComponent(dog, size)).addComponent(dog, hp).addComponent(dog, color).addComponent(dog, position);
 
     // for(int i = 0; i < 3; i++){
     //     system.debugPrint();
@@ -44,9 +41,7 @@ void Simulation::processInput() {
   }
 }
 
-void Simulation::update() {
-  ImGui::SFML::Update(*_window, deltaClock.restart());
-}
+void Simulation::update() { ImGui::SFML::Update(*_window, deltaClock.restart()); }
 
 void Simulation::draw() {
   _window->clear();
